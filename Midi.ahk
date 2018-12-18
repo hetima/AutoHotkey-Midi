@@ -142,6 +142,16 @@ Class Midi
   
   }
 
+  OpenMidiInName( name )
+  {
+    For key, value In __midiInDevices
+    {
+      If ( name == value.deviceName ){
+        this.OpenMidiIn( key )
+        return
+      }
+    }
+  }
 
   ; Close midi in device and stop listening
   CloseMidiIn( midiInDeviceId )
@@ -151,6 +161,16 @@ Class Midi
     
   }
 
+  CloseMidiInName( name )
+  {
+    For key, value In __midiInDevices
+    {
+      If ( name == value.deviceName ){
+        this.CloseMidiIn( key )
+        return
+      }
+    }
+  }
 
   ; Close all currently open midi in devices
   CloseMidiIns()
