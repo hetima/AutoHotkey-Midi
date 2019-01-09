@@ -146,7 +146,7 @@ Class Midi
   OpenMidiIn( midiInDeviceId )
   {
 
-    __OpenMidiIn( midiInDeviceId )
+    return __OpenMidiIn( midiInDeviceId )
   
   }
 
@@ -155,16 +155,16 @@ Class Midi
     For key, value In __midiInDevices
     {
       If ( name == value.deviceName ){
-        this.OpenMidiIn( key )
-        return
+        return this.OpenMidiIn( key )
       }
     }
+    return -1
   }
 
   OpenMidiOut( midiOutDeviceId )
   {
 
-    __OpenMidiOut( midiOutDeviceId )
+    return __OpenMidiOut( midiOutDeviceId )
   
   }
 
@@ -173,10 +173,10 @@ Class Midi
     For key, value In __midiOutDevices
     {
       If ( name == value.deviceName ){
-        this.OpenMidiOut( key )
-        return
+        return this.OpenMidiOut( key )
       }
     }
+    return -1
   }
 
   ; Close midi in device and stop listening
@@ -455,7 +455,7 @@ __OpenMidiIn( midiInDeviceId )
   If ( midiInOpenResult || ! midiInHandle )
   {
     MsgBox, Failed to open midi in device
-    Return
+    Return -1
   }
 
   ; Fetch the actual handle value from the pointer
@@ -468,7 +468,7 @@ __OpenMidiIn( midiInDeviceId )
   If ( midiInStartResult )
   {
     MsgBox, Failed to start midi in device
-    Return
+    Return -1
   }
 
   ; Create a spot in our global event storage for this midi input handle
@@ -498,6 +498,7 @@ __OpenMidiIn( midiInDeviceId )
   menuDeviceName := device.deviceName
   Menu __MidInDevices, Check, %menuDeviceName%
 
+  return midiInDeviceId
 }
 
 
@@ -573,7 +574,7 @@ __OpenMidiOut( midiOutDeviceId )
   If ( midiOutOpenResult || ! midiOutHandle )
   {
     MsgBox, Failed to open midi out device
-    Return
+    Return -1
   }
 
   ; Fetch the actual handle value from the pointer
@@ -586,7 +587,7 @@ __OpenMidiOut( midiOutDeviceId )
   If ( midiOutStartResult )
   {
     MsgBox, Failed to start midi out device
-    Return
+    Return -1
   }
 
   ; Create a spot in our global event storage for this midi input handle
@@ -608,6 +609,8 @@ __OpenMidiOut( midiOutDeviceId )
   ; Check this device as enabled in the menu
   menuDeviceName := device.deviceName
   Menu __MidOutDevices, Check, %menuDeviceName%
+
+  return midiOutDeviceId
 }
 
 __CloseMidiOut( midiOutDeviceId )
