@@ -92,7 +92,7 @@ Class Midi
 {
 
   ; Instance creation
-  __New()
+  __New( midiInName = "", midiOutName = "" )
   {
 
     ; Initialize midi environment
@@ -101,6 +101,12 @@ Class Midi
     this.QueryMidiOutDevices()
     this.SetupDeviceMenus()
 
+    if(StrLen(midiInName)) {
+      this.OpenMidiInName(midiInName)
+    }
+    if(StrLen(midiOutName)) {
+      this.OpenMidiOutName(midiOutName)
+    }
   }
 
   ; Instance destruction
