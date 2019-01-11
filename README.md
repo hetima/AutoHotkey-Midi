@@ -2,12 +2,20 @@
 
 Add MIDI input event handling to your AutoHotkey scripts
 
+
+# About this folk
+
+- open/close midi device by name
+- passing ignored events to another device
+
+---
+
+
 ```ahk
 
 #include AutoHotkey-Midi/Midi.ahk
 
-midi := new Midi()
-midi.OpenMidiIn( 5 )
+midi := new Midi( "Midi In Device Name", "Midi Out Device Name to pass" )
 
 Return
 
