@@ -3,7 +3,7 @@
 Add MIDI input event handling to your AutoHotkey scripts
 
 
-# About this folk
+# About this fork
 
 - open/close midi device by name
 - passing ignored events to another device
